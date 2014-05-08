@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+         xmlns:beans="http://www.springframework.org/schema/beans"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                             http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <http use-expressions="true" auto-config="false" create-session="never">
+        <intercept-url pattern="/DOIRegistration/**" access="ROLE_USER"/>
+        <intercept-url pattern="/**" access="denyAll"/>
+        <http-basic/>
+    </http>
+
+    <global-method-security pre-post-annotations="enabled">
+    </global-method-security>
+
+    <!--
+        For passwords, check internal confluence
+    -->
+    <authentication-manager>
+        <authentication-provider>
+            <password-encoder hash="sha"/>
+            <user-service>
+                <user name="peptideAtlas" password="d865f3664156e6b333b68464884a3332147ab10f" authorities="ROLE_USER"/>
+                <user name="pride" password="32dd8e275701b0ecd90eb176832727e3f2ac978d" authorities="ROLE_USER"/>
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+
+
+</beans:beans>
