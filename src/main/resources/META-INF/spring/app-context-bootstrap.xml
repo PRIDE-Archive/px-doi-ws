@@ -10,7 +10,7 @@
     <bean id="doiRegister" class="uk.ac.ebi.pride.doi.RegisterDOI">
         <constructor-arg name="metaDataDOI">
             <bean class="uk.ac.ebi.pride.doi.MetaDataDOI">
-                <property name="dataOwner" value="${archive.doi.data_owner}"/>
+                <property name="dataOwner" value="${archive.doi.data.owner}"/>
                 <property name="email" value="${archive.doi.mail}"/>
                 <property name="organization" value="${archive.doi.organization}"/>
                 <property name="password" value="${archive.doi.password}"/>
