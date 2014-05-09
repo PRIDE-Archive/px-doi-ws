@@ -6,13 +6,10 @@
                              http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
     <http use-expressions="true" auto-config="false" create-session="never">
-        <intercept-url pattern="/DOIRegistration/**" access="ROLE_USER"/>
+        <intercept-url pattern="/doi/registration/**" access="ROLE_USER"/>
         <intercept-url pattern="/**" access="denyAll"/>
         <http-basic/>
     </http>
-
-    <global-method-security pre-post-annotations="enabled">
-    </global-method-security>
 
     <!--
         For passwords, check internal confluence

@@ -21,7 +21,7 @@ import java.util.Date;
 public class DOIRegistrationAdvice {
     private static final Logger logger = LoggerFactory.getLogger(DOIRegistrationAdvice.class);
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
 
     @ExceptionHandler(DOIRegistrationException.class)
     public @ResponseBody

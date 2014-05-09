@@ -29,13 +29,13 @@ public class DOIRegistrationController {
     @Autowired
     private RegisterDOI doiRegister;
 
-    @Value("#{doiProperties['doi.prefix']}")
+    @Value("#{doiProperties['archive.doi.prefix']}")
     private String doiPrefix;
 
-    @Value("#{doiProperties['doi.px.accession.url.prefix']}")
+    @Value("#{doiProperties['archive.doi.px.accession.url.prefix']}")
     private String pxUrlPrefix;
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
 
     @RequestMapping(value = "/registration/{projectAccession}/mode/{registrationMode}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
@@ -64,7 +64,7 @@ public class DOIRegistrationController {
         logger.info("Going to register " + doi);
 
         try {
-            //when not in testing mode, use the controller to register DOI to Crossref
+            //when not in testing mode, use the controller to register DOI to CrossRef
             if (!testMode) {
                 registration = doiRegister.registerDOI(doi, mappedUrl);
                 if (!registration) {
