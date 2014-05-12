@@ -23,6 +23,7 @@
             <user-service>
                 <user name="peptideAtlas" password="d865f3664156e6b333b68464884a3332147ab10f" authorities="PARTNER"/>
                 <user name="pride" password="32dd8e275701b0ecd90eb176832727e3f2ac978d" authorities="PARTNER"/>
+                <user name="massive" password="e30db33d6633685f8d986791faaabfe4bc865433" authorities="PARTNER"/>
             </user-service>
         </authentication-provider>
     </authentication-manager>

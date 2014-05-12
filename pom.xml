@@ -8,6 +8,7 @@
     <artifactId>archive-doi-ws</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
+    <name>archive-doi-ws</name>
 
     <!--
      To build the project several settings are required which are provided via maven profiles
@@ -16,6 +17,7 @@
 
             If Intellij doesn't replace the properties, try to following command using command line
             or check whether you are using maven 2
+
             mvn -P doi.user clean package
     -->
 
