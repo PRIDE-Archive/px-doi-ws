@@ -22,7 +22,6 @@ import java.util.Date;
  * @author Rui Wang
  */
 @Controller
-@RequestMapping("/doi")
 public class DOIRegistrationController {
     private static final Logger logger = LoggerFactory.getLogger(DOIRegistrationController.class);
 
