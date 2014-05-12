@@ -13,8 +13,8 @@
                 <property name="dataOwner" value="${archive.doi.data.owner}"/>
                 <property name="email" value="${archive.doi.mail}"/>
                 <property name="organization" value="${archive.doi.organization}"/>
-                <property name="password" value="${archive.doi.password}"/>
                 <property name="user" value="${archive.doi.user}"/>
+                <property name="password" value="${archive.doi.password}"/>
                 <property name="title" value="${archive.doi.title}"/>
             </bean>
         </constructor-arg>

@@ -18,7 +18,7 @@
     <parent>
         <groupId>uk.ac.ebi.pride.maven</groupId>
         <artifactId>pride-base-master</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
     </parent>
 
     <properties>
@@ -31,7 +31,7 @@
     </properties>
 
     <build>
-        <finalName>${artifactId}-${version}</finalName>
+        <finalName>${project.artifactId}-${project.version}</finalName>
 
         <resources>
             <!-- regular resources -->
@@ -43,6 +43,7 @@
                     <include>**/props/*.properties</include>
                 </includes>
             </resource>
+
             <!-- Maven should not filter other files -->
             <resource>
                 <directory>src/main/resources</directory>
@@ -50,6 +51,12 @@
                 <excludes>
                     <exclude>**/props/*.properties</exclude>
                 </excludes>
+            </resource>
+
+            <!-- webapp resources -->
+            <resource>
+                <directory>src/main/webapp/WEB-INF</directory>
+                <filtering>false</filtering>
             </resource>
         </resources>
 
