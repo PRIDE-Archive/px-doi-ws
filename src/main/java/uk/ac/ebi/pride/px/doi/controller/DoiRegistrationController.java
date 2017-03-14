@@ -29,9 +29,20 @@ public class DoiRegistrationController {
 
   @Value("${archive.doi.prefix.property}")
   private String doiPrefix;
-
   @Value("${archive.doi.px.accession.url.prefix.property}")
   private String pxUrlPrefix;
+  @Value("${archive.doi.organization.property}")
+  private String organization;
+  @Value("${archive.doi.mail.property}")
+  private String email;
+  @Value("${archive.doi.title.property}")
+  private String title;
+  @Value("${archive.doi.data.owner.property}")
+  private String dataOwner;
+  @Value("${archive.doi.user.property}")
+  private String user;
+  @Value("${archive.doi.password.property}")
+  private String password;
 
   private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
 
@@ -80,7 +91,14 @@ public class DoiRegistrationController {
     log.info("Going to register " + doi);
     try {
       if (productionMode) {
-        registered = new DoiRegister(new DoiMetaData()).registerDOI(doi, mappedUrl);
+        DoiMetaData doiMetaData = new DoiMetaData();
+        doiMetaData.setOrganization(organization);
+        doiMetaData.setEmail(email);
+        doiMetaData.setTitle(title);
+        doiMetaData.setDataOwner(dataOwner);
+        doiMetaData.setUser(user);
+        doiMetaData.setPassword(password);
+        registered = new DoiRegister(doiMetaData).registerDOI(doi, mappedUrl);
         if (registered) {
           log.info("Successfully registered DOI " + doi + " " + mappedUrl);
         } else {

@@ -9,17 +9,11 @@ import org.springframework.beans.factory.annotation.Value;
  */
 public class DoiMetaData {
 
-  @Value("${archive.doi.organization.property}")
   private String organization;
-  @Value("${archive.doi.mail.property}")
   private String email;
-  @Value("${archive.doi.title.property}")
   private String title;
-  @Value("${archive.doi.data.owner.property}")
   private String dataOwner;
-  @Value("${archive.doi.user.property}")
   private String user;
-  @Value("${archive.doi.password.property}")
   private String password;
 
   /**
