@@ -126,7 +126,8 @@ public class DoiRegister {
    * @see this#sendPOST(String, String, String)
    */
   public static boolean sendPOST(String XMLFile, String username, String password, boolean test) throws Exception {
-    boolean registered = false;    HTTPClient.NVPair[] uploadOpts = new HTTPClient.NVPair[1];
+    boolean registered = false;
+    HTTPClient.NVPair[] uploadOpts = new HTTPClient.NVPair[1];
     HTTPClient.NVPair[] uploadFileOpts = new HTTPClient.NVPair[1];
     HTTPClient.NVPair[] ct_hdr = new HTTPClient.NVPair[1];
     /*     CrossRef service options
@@ -139,7 +140,6 @@ public class DoiRegister {
     uploadFileOpts[0] = new HTTPClient.NVPair("fname", XMLFile);
     byte[] uploadBytes = HTTPClient.Codecs.mpFormDataEncode(uploadOpts, uploadFileOpts, ct_hdr);
     HTTPClient.CookieModule.setCookiePolicyHandler(null);
-    // connect to a different host if in test mode
     HTTPClient.HTTPConnection httpConn;
     if (test) {
       httpConn = new HTTPClient.HTTPConnection(test_host, port);
