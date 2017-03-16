@@ -10,9 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import uk.ac.ebi.pride.px.doi.model.DoiRegistration;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static uk.ac.ebi.pride.px.doi.model.DoiRegistrationStatus.SUCCESS;
 
