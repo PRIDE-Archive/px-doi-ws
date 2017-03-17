@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import uk.ac.ebi.pride.px.doi.model.DoiRegistration;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 import static uk.ac.ebi.pride.px.doi.model.DoiRegistrationStatus.SUCCESS;
 
 /**
@@ -42,5 +43,24 @@ public class DemoApplicationTests {
         );
     assertThat(SUCCESS.equals(entity.getBody().getStatus()));
     assertThat("SUCCESS".equals(entity.getBody().getMessage()));
+  }
+
+  /**
+   * This method attempts to use the web service using bad and no login details, which should not be allowed
+   * A DOI is not registered.
+   */
+  @Test
+  public void testRegisterDoiFailAuth() {
+    ResponseEntity entity = restTemplate
+        .withBasicAuth("foo", "bar")
+        .getForEntity("/"
+            , Object.class
+        );
+    assertThat(UNAUTHORIZED.equals(entity.getStatusCode()));
+    entity = restTemplate
+        .getForEntity("/"
+            , Object.class
+        );
+    assertThat(UNAUTHORIZED.equals(entity.getStatusCode()));
   }
 }
