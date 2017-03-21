@@ -25,7 +25,6 @@ public class DoiRegister {
   private static final String host = "doi.crossref.org";
   private static final String test_host = "test.crossref.org";
   private static final int port = 80;
-
   private DoiMetaData doiMetaData;
   private boolean test = false;
 
@@ -103,14 +102,6 @@ public class DoiRegister {
   }
 
   /**
-   * This method sends a POST message to register a DOI in production.
-   * @throws Exception any problems during the DOI registration
-   */
-  public static boolean sendPOST(String XMLFile, String username, String password) throws Exception {
-    return DoiRegister.sendPOST(XMLFile, username, password, false);
-  }
-
-  /**
    * This method sends a POST message to register a DOI in the test environment or not.
    *  Note: the test environment does NOT work!
    * @param XMLFile  the XML file containing the DOI request parameters.
@@ -123,9 +114,8 @@ public class DoiRegister {
    * @return true if crossref.org has successfully received the registration request.
    *                  Note: this is not a confirmation that the DOI has actually been registered!
    * @throws Exception any problems during the DOI registration
-   * @see this#sendPOST(String, String, String)
    */
-  public static boolean sendPOST(String XMLFile, String username, String password, boolean test) throws Exception {
+  private static boolean sendPOST(String XMLFile, String username, String password, boolean test) throws Exception {
     boolean registered = false;
     HTTPClient.NVPair[] uploadOpts = new HTTPClient.NVPair[1];
     HTTPClient.NVPair[] uploadFileOpts = new HTTPClient.NVPair[1];
@@ -153,4 +143,21 @@ public class DoiRegister {
     httpConn.stop();
     return registered;
   }
+
+  /**
+   * Confirms if this is using a test mode.
+   * @return true for test mode, false oterwise (default).
+   */
+  public boolean isTest() {
+    return test;
+  }
+
+  /**
+   * Sets the test mode.
+   * @param test true for test mode, false otherwise (default).
+   */
+  public void setTest(boolean test) {
+    this.test = test;
+  }
+
 }
