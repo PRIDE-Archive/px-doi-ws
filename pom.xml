@@ -75,8 +75,8 @@
         </plugins>
     </build>
     <scm>
-        <connection>scm:git:bitbucket.org/pride-ebi/px-doi-ws.git</connection>
-        <developerConnection>scm:git:bitbucket.org/pride-ebi/px-doi-ws.git</developerConnection>
+        <connection>scm:git:https://bitbucket.org/pride-ebi/px-doi-ws.git</connection>
+        <developerConnection>scm:git:https://bitbucket.org/pride-ebi/px-doi-ws.git</developerConnection>
         <url>https://bitbucket.org/pride-ebi/px-doi-ws</url>
         <tag>HEAD</tag>
     </scm>
