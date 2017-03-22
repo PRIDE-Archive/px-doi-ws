@@ -4,7 +4,7 @@
 
     <groupId>uk.ac.ebi.pride.px.doi</groupId>
     <artifactId>px-doi-ws</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>px-doi-ws</name>
@@ -77,6 +77,6 @@
         <connection>scm:git:https://bitbucket.org/pride-ebi/px-doi-ws.git</connection>
         <developerConnection>scm:git:https://bitbucket.org/pride-ebi/px-doi-ws.git</developerConnection>
         <url>https://bitbucket.org/pride-ebi/px-doi-ws</url>
-        <tag>px-doi-ws-1.0.0</tag>
+        <tag>HEAD</tag>
     </scm>
 </project>
