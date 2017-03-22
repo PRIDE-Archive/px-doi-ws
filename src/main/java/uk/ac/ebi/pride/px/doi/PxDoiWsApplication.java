@@ -79,7 +79,7 @@ public class PxDoiWsApplication {
       http.httpBasic()
           .and()
           .authorizeRequests()
-          .antMatchers(HttpMethod.POST, "/registration/**").hasRole(PARTNER)
+          .antMatchers(HttpMethod.POST, "/doi-ws/registration/**").hasRole(PARTNER)
           .antMatchers(HttpMethod.POST, "/**").denyAll()
           .and()
           .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER)

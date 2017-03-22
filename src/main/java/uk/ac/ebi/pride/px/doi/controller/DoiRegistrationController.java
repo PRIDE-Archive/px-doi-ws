@@ -50,10 +50,10 @@ public class DoiRegistrationController {
    * This starts the process to register a DOI for the provided accession number, in the production or test environment.
    * @param projectAccession the project accession to register.
    * @param registrationMode the environment, "production" for production, or anything else for test.
-   * @param user the user who the DOI was reistered for
+   * @param user the user who the DOI was registered for
    * @return a DoiRegistration with the registration result, success or error.
    */
-  @RequestMapping(value = "/registration/{projectAccession}/mode/{registrationMode}",
+  @RequestMapping(value = "/doi-ws/registration/{projectAccession}/mode/{registrationMode}",
       method = RequestMethod.POST,
       produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.CREATED)

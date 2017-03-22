@@ -37,7 +37,7 @@ public class DemoApplicationTests {
   public void testRegisterDoi() {
     ResponseEntity<DoiRegistration> entity = restTemplate
         .withBasicAuth(prideUsername, pridePassword)
-        .postForEntity("/registration/test123/mode/test"
+        .postForEntity("/doi-ws/registration/test123/mode/test"
             , ""
             , DoiRegistration.class
         );
