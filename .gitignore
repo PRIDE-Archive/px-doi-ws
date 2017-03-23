@@ -1,17 +1,23 @@
-*.sw?
-.#*
-*#
-*~
-.classpath
-.project
-.settings
-bin
-build
-target
-dependency-reduced-pom.xml
-*.sublime-*
-/scratch
-.gradle
-.idea
+# Logs and databases #
+######################
+*.log
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Intellij generated files #
+#####################
 *.iml
-README.html
+
+# Directory to ignore #
+#####################
+log/
+target/
+.idea/
