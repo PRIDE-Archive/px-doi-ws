@@ -59,7 +59,7 @@ public class ErrorJsonController implements ErrorController {
   }
 
   /**
-   * This method gets the error attributes from the requeste and converts it to a Map.
+   * This method gets the error attributes from the request and converts it to a Map.
    * @param request the http request
    * @param includeStack true to include the stack trace, false otherwise
    * @return a map of key/value pairs about the error that was encountered

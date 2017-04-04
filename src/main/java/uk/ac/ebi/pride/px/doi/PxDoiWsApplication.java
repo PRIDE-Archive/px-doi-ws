@@ -69,7 +69,7 @@ public class PxDoiWsApplication {
     }
 
     /**
-     * This method configues the access to the web service: /registration is accessible by logged-in PARTNERs only,
+     * This method configures the access to the web service: /registration is accessible by logged-in PARTNERs only,
      * all other paths are denied. Sessions are not created. Cross Site Request Forgery protection is disabled.
      * @param http the http security
      * @throws Exception any exceptions during the http security configuration process
