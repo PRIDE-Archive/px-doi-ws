@@ -1,7 +1,5 @@
 package uk.ac.ebi.pride.px.doi.model;
 
-import org.springframework.beans.factory.annotation.Value;
-
 /**
  * This class specifies all the information required when registering a DOI through CrossRef.
  *
