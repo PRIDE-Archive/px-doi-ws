@@ -64,16 +64,13 @@ public class DoiRegistrationController {
     String mappedUrl = pxUrlPrefix + '/' + formattedProjectAccession;
     boolean productionMode = PRODUCTION_MODE.equalsIgnoreCase(registrationMode);
     boolean registered = registerDoi(doi, mappedUrl, productionMode);
-    if (registered) {
-      log.info("DOI " + doi + " registered for user " + user.getName());
-    } else {
-      log.error("ERROR: DOI " + doi + " NOT registered for user " + user.getName());
-    }
     Date time = Calendar.getInstance().getTime();
     DoiRegistration result;
     if (registered){
+      log.info("DOI " + doi + " registered for user " + user.getName());
       result = new DoiRegistration(doi, mappedUrl, DoiRegistrationStatus.SUCCESS, "Registration successful", sdf.format(time));
     } else {
+      log.error("DOI " + doi + " NOT registered for user " + user.getName());
       result = new DoiRegistration(doi, mappedUrl, DoiRegistrationStatus.ERROR, "Registration FAILED", sdf.format(time));
     }
     return result;
@@ -88,7 +85,7 @@ public class DoiRegistrationController {
    */
   private boolean registerDoi(String doi, String mappedUrl, boolean productionMode) {
     boolean registered = false;
-    log.info("Going to register " + doi);
+    log.info("Attempting to register " + doi);
     try {
       if (productionMode) {
         DoiMetaData doiMetaData = new DoiMetaData();
