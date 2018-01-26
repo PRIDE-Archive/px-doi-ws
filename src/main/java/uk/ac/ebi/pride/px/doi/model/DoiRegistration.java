@@ -122,7 +122,7 @@ public class DoiRegistration implements Serializable {
   }
 
   /**
-   * Compares if two DoiRegistration objects contain the same iformation or not.
+   * Compares if two DoiRegistration objects contain the same information or not.
    * @param o the other DoiRegistration object to compare to.
    * @return true for the same information, false otherwise.
    */
