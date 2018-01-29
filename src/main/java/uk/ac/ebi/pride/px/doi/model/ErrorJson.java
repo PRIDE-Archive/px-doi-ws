@@ -4,8 +4,6 @@ import java.util.Map;
 
 /**
  * This class used to store/retrieve information about a web service error.
- *
- * @author Tobias-Ternent
  */
 public class ErrorJson {
 

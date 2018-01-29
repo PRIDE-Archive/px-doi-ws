@@ -2,8 +2,6 @@ package uk.ac.ebi.pride.px.doi.model;
 
 /**
  * This class specifies all the information required when registering a DOI through CrossRef.
- *
- * @author Tobias-Ternent
  */
 public class DoiMetaData {
 

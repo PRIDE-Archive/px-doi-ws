@@ -5,8 +5,6 @@ import java.io.Serializable;
 
 /**
  * This class is used to hold information about a DOI registration.
- *
- * @author Tobias-Ternent
  */
 public class DoiRegistration implements Serializable {
   private String doi;

@@ -19,8 +19,6 @@ import java.util.Date;
 
 /**
  * This class handles the mapping for the DOI registration process, under the /registration... path.
- *
- * @author Tobias-Ternent
  */
 @Controller
 public class DoiRegistrationController {
