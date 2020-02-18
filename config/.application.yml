@@ -1,10 +1,8 @@
 # server settings
 server.port: $port
-management.port: $management_port
-endpoints.health.sensitive: false
 
 #log output file
-logging.file: '$logpath/logs_${HOSTNAME}/'
+logging.path: '$logpath/logs_${HOSTNAME}/'
 # required DOI metadata
 archive.doi:
   organization.property: $organization
