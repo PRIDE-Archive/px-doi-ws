@@ -1,0 +1,31 @@
+# server settings
+server.port: $port
+management.port: $management_port
+endpoints.health.sensitive: false
+
+#log output file
+logging.file: '$logpath/logs_${HOSTNAME}/'
+# required DOI metadata
+archive.doi:
+  organization.property: $organization
+  mail.property: $mail
+  title.property: $title
+  data.owner.property: $owner
+  user.property: $doi_user
+  password.property: $doi_passwd
+  px.accession.url.prefix.property: $px_accession_url
+  prefix.property: $prefix
+
+# user account details
+peptide.atlas:
+  username.property: $atlas_user
+  password.property: $atlas_passwd
+massive:
+  username.property: $massive_user
+  password.property: $massive_passwd
+jpost:
+  username.property: $jpost_user
+  password.property: $jpost_passwd
+pride:
+  username.property: $pride_user
+  password.property: $pride_passwd
