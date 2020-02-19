@@ -42,6 +42,14 @@ spec:
           env:
             - name: JAVA_OPTS
               value: "-Dhttp.proxyHost=$http_proxy_host -Dhttp.proxyPort=$http_proxy_port"
+            - name: HTTP_PROXY
+              value: "$http_proxy_host:$http_proxy_port"
+            - name: HTTPS_PROXY
+              value: "$http_proxy_host:$http_proxy_port"
+            - name: http_proxy
+              value: "$http_proxy_host:$http_proxy_port"
+            - name: https_proxy
+              value: "$http_proxy_host:$http_proxy_port"
           ports:
             - containerPort: $port
           volumeMounts:
