@@ -40,14 +40,8 @@ spec:
         - name: px-doi-ws
           image: $IMAGE
           env:
-            - name: HTTP_PROXY
-              value: $http_proxy
-            - name: HTTPS_PROXY
-              value: $http_proxy
-            - name: http_proxy
-              value: $http_proxy
-            - name: https_proxy
-              value: $http_proxy
+            - name: JAVA_OPTS
+              value: "-Dhttp.proxyHost=$http_proxy_host -Dhttp.proxyPort=$http_proxy_port"
           ports:
             - containerPort: $port
           volumeMounts:
