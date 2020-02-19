@@ -7,7 +7,7 @@ WORKDIR /px-doi-ws
 COPY src ./src
 COPY pom.xml ./
 COPY config/application.yml ./application.yml
-RUN mvn clean package
+RUN mvn clean package -DskipTests
 
 # Package stage
 FROM maven:3.3.9-jdk-8-alpine

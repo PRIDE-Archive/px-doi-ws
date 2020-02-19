@@ -39,6 +39,15 @@ spec:
       containers:
         - name: px-doi-ws
           image: $IMAGE
+          env:
+            - name: HTTP_PROXY
+              value: http://hh-wwwcache.ebi.ac.uk:3128
+            - name: HTTPS_PROXY
+              value: http://hh-wwwcache.ebi.ac.uk:3128
+            - name: http_proxy
+              value: http://hh-wwwcache.ebi.ac.uk:3128
+            - name: https_proxy
+              value: http://hh-wwwcache.ebi.ac.uk:3128
           ports:
             - containerPort: $port
           volumeMounts:
