@@ -13,4 +13,4 @@ RUN mvn clean package -DskipTests
 FROM maven:3.3.9-jdk-8-alpine
 WORKDIR /px-doi-ws
 COPY --from=build-env /px-doi-ws/target/px-doi-api.jar ./
-ENTRYPOINT ["java", "$JAVA_OPTS", "-jar", "px-doi-api.jar"]
+ENTRYPOINT ["java", "${JAVA_OPTS}", "-jar", "px-doi-api.jar"]
