@@ -13,4 +13,5 @@ RUN mvn clean package -DskipTests
 FROM maven:3.3.9-jdk-8-alpine
 WORKDIR /px-doi-ws
 COPY --from=build-env /px-doi-ws/target/px-doi-api.jar ./
+RUN echo 'hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4' >> /etc/nsswitch.conf
 ENTRYPOINT java ${JAVA_OPTS} -jar px-doi-api.jar
