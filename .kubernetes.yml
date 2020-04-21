@@ -28,12 +28,12 @@ spec:
             items:
               - key: application.yml
                 path: application.yml
-        - name: filebeat-config
-          configMap:
-            name: $FILEBEAT_CONFIG_MAP
-            items:
-              - key: filebeat.yml
-                path: filebeat.yml
+#        - name: filebeat-config
+#          configMap:
+#            name: $FILEBEAT_CONFIG_MAP
+#            items:
+#              - key: filebeat.yml
+#                path: filebeat.yml
         - name: logvolume
           emptyDir: {}
       containers:
