@@ -2,7 +2,7 @@
 FROM maven:3.3.9-jdk-8-alpine AS build-env
 
 # Create app directory
-WORKDIR /px-doi-ws
+WORKDIR /app
 
 COPY src ./src
 COPY pom.xml ./
@@ -11,6 +11,6 @@ RUN mvn clean package -DskipTests
 
 # Package stage
 FROM maven:3.3.9-jdk-8-alpine
-WORKDIR /px-doi-ws
-COPY --from=build-env /px-doi-ws/target/px-doi-api.jar ./
+WORKDIR /app
+COPY --from=build-env /app/target/px-doi-api.jar ./
 ENTRYPOINT java ${JAVA_OPTS} -jar px-doi-api.jar

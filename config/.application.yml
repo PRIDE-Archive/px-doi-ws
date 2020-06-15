@@ -1,9 +1,11 @@
+spring.application.name: $app_name
+
 # server settings
 server:
   port: $port
 
 #log output file
-logging.path: '$logpath/logs_${HOSTNAME}/'
+logging.path: $logspath/logs_${HOSTNAME}/
 # required DOI metadata
 archive.doi:
   organization.property: $organization

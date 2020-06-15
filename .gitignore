@@ -21,3 +21,6 @@ Thumbs.db
 log/
 target/
 .idea/
+
+config/application*
+/logs/

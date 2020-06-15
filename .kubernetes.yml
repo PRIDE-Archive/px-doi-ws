@@ -1,14 +1,26 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: $log_volume_pvc
+spec:
+  storageClassName: $k8s_storageclass
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: $log_volume_size
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: px-doi-ws
+  name: $app_name
   labels:
-    app: px-doi-ws
+    app: $app_name
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: px-doi-ws
+      app: $app_name
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -17,14 +29,17 @@ spec:
   template:
     metadata:
       labels:
-        app: px-doi-ws
+        app: $app_name
     spec:
       imagePullSecrets:
         - name: $DOCKER_PULL_SECRET
       volumes:
+        - name: logvolume
+          persistentVolumeClaim:
+            claimName: $log_volume_pvc
         - name: application-config
           configMap:
-            name: $PX_DOI_CONFIG_MAP
+            name: $SPRING_CONFIG_MAP
             items:
               - key: application.yml
                 path: application.yml
@@ -34,30 +49,28 @@ spec:
 #            items:
 #              - key: filebeat.yml
 #                path: filebeat.yml
-        - name: logvolume
-          emptyDir: {}
       containers:
-        - name: px-doi-ws
+        - name: $app_name
           image: $IMAGE
           env:
             - name: JAVA_OPTS
               value: "-Dhttp.proxyHost=$http_proxy_host -Dhttp.proxyPort=$http_proxy_port"
-            - name: HTTP_PROXY
-              value: "$http_proxy_host:$http_proxy_port"
-            - name: HTTPS_PROXY
-              value: "$http_proxy_host:$http_proxy_port"
-            - name: http_proxy
-              value: "$http_proxy_host:$http_proxy_port"
-            - name: https_proxy
-              value: "$http_proxy_host:$http_proxy_port"
+#            - name: HTTP_PROXY
+#              value: "$http_proxy_host:$http_proxy_port"
+#            - name: HTTPS_PROXY
+#              value: "$http_proxy_host:$http_proxy_port"
+#            - name: http_proxy
+#              value: "$http_proxy_host:$http_proxy_port"
+#            - name: https_proxy
+#              value: "$http_proxy_host:$http_proxy_port"
           ports:
             - containerPort: $port
           volumeMounts:
             - name: application-config
-              mountPath: "/px-doi-ws/config/"
+              mountPath: "/app/config/"
               readOnly: true
             - name: logvolume
-              mountPath: $logpath
+              mountPath: $logspath
           livenessProbe:
             httpGet:
               path: /health
@@ -93,10 +106,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: px-doi-ws-service
+  name: $app_name-service
 spec:
   selector:
-    app: px-doi-ws
+    app: $app_name
   ports:
     - protocol: TCP
       port: $port
