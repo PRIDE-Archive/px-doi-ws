@@ -18,6 +18,7 @@ metadata:
     app: $app_name
 spec:
   replicas: 2
+  revisionHistoryLimit: 1
   selector:
     matchLabels:
       app: $app_name
