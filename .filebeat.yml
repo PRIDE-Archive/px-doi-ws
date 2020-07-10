@@ -19,10 +19,14 @@ setup:
     pattern: $app_name
     settings.index.number_of_shards: 3
 
-output.elasticsearch:
-  hosts: $elasticsearch_hosts
-  proxy_url: http://$http_proxy_host:$http_proxy_port
+output.logstash:
+  hosts: $logstash_hosts
   index: $app_name
+
+#output.elasticsearch:
+#  hosts: $elasticsearch_hosts
+#  proxy_url: http://$http_proxy_host:$http_proxy_port
+#  index: $app_name
 
   setup.ilm.enabled: false #this is needed for docker image from 7.x versions
 
