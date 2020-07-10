@@ -1,3 +1,5 @@
+path.data: $logspath/filebeat/data #to retain the state even if the filebeat pod restarts
+
 filebeat.inputs:
   - type: log
     enabled: true
