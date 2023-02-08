@@ -28,8 +28,6 @@ output.logstash:
 #  proxy_url: http://$http_proxy_host:$http_proxy_port
 #  index: $app_name
 
-  setup.ilm.enabled: false #this is needed for docker image from 7.x versions
-
 processors:
   - add_host_metadata: ~
   - add_cloud_metadata: ~
