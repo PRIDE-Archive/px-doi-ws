@@ -30,12 +30,18 @@ public class DoiRegistrationController {
     private String doiPrefix;
     @Value("${archive.doi.px.accession.url.prefix.property}")
     private String pxUrlPrefix;
+    @Value("${archive.doi.pride.accession.url.prefix}")
+    private String prideUrlPrefix;
+    @Value("${pride.username.property}")
+    private String prideUsername;
+    @Value("${archive.doi.pride.dataset.title}")
+    private String prideDatasetTitle;
     @Value("${archive.doi.organization.property}")
     private String organization;
     @Value("${archive.doi.mail.property}")
     private String email;
     @Value("${archive.doi.title.property}")
-    private String title;
+    private String pxDatasetTitle;
     @Value("${archive.doi.data.owner.property}")
     private String dataOwner;
     @Value("${archive.doi.user.property}")
@@ -54,23 +60,32 @@ public class DoiRegistrationController {
      * @return a DoiRegistration with the registration result, success or error.
      */
     @RequestMapping(value = "/registration/{projectAccession}/mode/{registrationMode}",
-            method = RequestMethod.POST,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+            method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public @ResponseBody
     DoiRegistration registerDOI(@PathVariable String projectAccession, @PathVariable String registrationMode, Principal user) {
+        DoiRegistration result;
         String formattedProjectAccession = projectAccession.toUpperCase();
         String doi = doiPrefix + '/' + formattedProjectAccession;
         String mappedUrl = pxUrlPrefix + '/' + formattedProjectAccession;
-        boolean productionMode = PRODUCTION_MODE.equalsIgnoreCase(registrationMode);
-        boolean registered = registerDoi(doi, mappedUrl, productionMode);
         Date time = Calendar.getInstance().getTime();
-        DoiRegistration result;
+        String title = pxDatasetTitle;
+        String userName = user.getName();
+        if (userName.equals(prideUsername) && formattedProjectAccession.startsWith("PAD")) {
+            mappedUrl = prideUrlPrefix + '/' + formattedProjectAccession;
+            title = prideDatasetTitle;
+        }
+        else if(!formattedProjectAccession.startsWith("PXD")) {
+            result = new DoiRegistration(doi, mappedUrl, DoiRegistrationStatus.ERROR, "projectAccession has to start with PXD", sdf.format(time));
+            return result;
+        }
+        boolean productionMode = PRODUCTION_MODE.equalsIgnoreCase(registrationMode);
+        boolean registered = registerDoi(doi, mappedUrl, productionMode, title);
         if (registered) {
-            log.info("DOI " + doi + " registered for user " + user.getName());
+            log.info("DOI " + doi + " registered for user " + userName);
             result = new DoiRegistration(doi, mappedUrl, DoiRegistrationStatus.SUCCESS, "Registration successful", sdf.format(time));
         } else {
-            log.error("DOI " + doi + " NOT registered for user " + user.getName());
+            log.error("DOI " + doi + " NOT registered for user " + userName);
             result = new DoiRegistration(doi, mappedUrl, DoiRegistrationStatus.ERROR, "Registration FAILED", sdf.format(time));
         }
         return result;
@@ -84,7 +99,7 @@ public class DoiRegistrationController {
      * @param productionMode true for production, false otherwise for test.
      * @return true if the registration was successful, false otherwise.
      */
-    private boolean registerDoi(String doi, String mappedUrl, boolean productionMode) {
+    private boolean registerDoi(String doi, String mappedUrl, boolean productionMode, String title) {
         boolean registered = false;
         log.info("Attempting to register " + doi);
         try {
@@ -112,12 +127,15 @@ public class DoiRegistrationController {
         return registered;
     }
 
-    @RequestMapping(value = "/monit",
-            method = RequestMethod.GET,
-            produces = MediaType.TEXT_PLAIN_VALUE)
+    @RequestMapping(value = "/monit", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody
-    String monitStatus() {
+    public @ResponseBody String monitStatus() {
+        return "UP";
+    }
+
+    @RequestMapping(value = "/health", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public @ResponseBody String healthStatus() {
         return "UP";
     }
 

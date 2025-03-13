@@ -16,6 +16,8 @@ archive.doi:
   password.property: $doi_passwd
   px.accession.url.prefix.property: $px_accession_url
   prefix.property: $prefix
+  pride.accession.url.prefix: $pride_accession_url_prefix
+  pride.dataset.title: $pride_dataset_title
 
 # user account details
 peptide.atlas:
