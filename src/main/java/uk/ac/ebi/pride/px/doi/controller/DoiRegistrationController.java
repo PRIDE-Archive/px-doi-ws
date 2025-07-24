@@ -2,11 +2,14 @@ package uk.ac.ebi.pride.px.doi.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import uk.ac.ebi.pride.px.doi.model.DoiMetaData;
 import uk.ac.ebi.pride.px.doi.model.DoiRegistration;
 import uk.ac.ebi.pride.px.doi.model.DoiRegistrationStatus;
@@ -48,6 +51,10 @@ public class DoiRegistrationController {
     private String user;
     @Value("${archive.doi.password.property}")
     private String password;
+
+    @Autowired
+    @Qualifier("proxyRestTemplate")
+    private RestTemplate restTemplate;
 
     private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
 
@@ -111,7 +118,7 @@ public class DoiRegistrationController {
                 doiMetaData.setDataOwner(dataOwner);
                 doiMetaData.setUser(user);
                 doiMetaData.setPassword(password);
-                registered = new DoiRegister(doiMetaData).registerDOI(doi, mappedUrl);
+                registered = new DoiRegister(doiMetaData, restTemplate).registerDOI(doi, mappedUrl);
                 if (registered) {
                     log.info("Successfully registered DOI " + doi + " " + mappedUrl);
                 } else {

@@ -27,14 +27,16 @@ public class DoiRegister {
     private static final String test_host = "https://test.crossref.org";
     private DoiMetaData doiMetaData;
     private boolean test = false;
+    private final RestTemplate restTemplate;
 
     /**
      * Constructor, sets the DOI metadata.
      *
      * @param doiMetaData the DOI metadata
      */
-    public DoiRegister(DoiMetaData doiMetaData) {
+    public DoiRegister(DoiMetaData doiMetaData, RestTemplate restTemplate) {
         this.doiMetaData = doiMetaData;
+        this.restTemplate = restTemplate;
     }
 
     /**
@@ -61,7 +63,7 @@ public class DoiRegister {
                 fw.close();
             }
         }
-        registered = DoiRegister.sendPOST(tmpFile.getAbsolutePath(), doiMetaData.getUser(), doiMetaData.getPassword(), test);
+        registered = sendPOST(tmpFile.getAbsolutePath(), doiMetaData.getUser(), doiMetaData.getPassword(), test);
         boolean deletedTemp = tmpFile.delete();
         if (deletedTemp) {
             log.info("Successfully deleted temp file.");
@@ -104,7 +106,7 @@ public class DoiRegister {
         fileWriter.write(body);
     }
 
-    private static boolean sendPOST(String xmlFilePath, String username, String password, boolean test) throws Exception {
+    private boolean sendPOST(String xmlFilePath, String username, String password, boolean test) throws Exception {
         boolean registered = false;
 
         // Prepare multipart body
@@ -125,8 +127,6 @@ public class DoiRegister {
         String baseUrl = test ? test_host : host;
         String url = baseUrl + "/servlet/deposit?login_id=" + username + "&login_passwd=" + password;
 
-        // Send request
-        RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
 
         if (response.getStatusCode() == HttpStatus.OK) {

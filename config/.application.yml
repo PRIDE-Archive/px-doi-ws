@@ -32,3 +32,6 @@ jpost:
 pride:
   username.property: $pride_user
   password.property: $pride_passwd
+
+proxy-host: $http_proxy_host
+proxy-port: $http_proxy_port
