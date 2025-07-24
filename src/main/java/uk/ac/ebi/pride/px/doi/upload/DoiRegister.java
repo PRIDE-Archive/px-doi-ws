@@ -25,7 +25,6 @@ public class DoiRegister {
     private static final String DATE_FORMAT = "yyyyMMddHHmm";
     private static final String host = "https://doi.crossref.org";
     private static final String test_host = "https://test.crossref.org";
-    private static final int port = 80;
     private DoiMetaData doiMetaData;
     private boolean test = false;
 
@@ -123,7 +122,7 @@ public class DoiRegister {
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
         // Build URL
-        String baseUrl = test ? test_host + ":" + port : host + ":" + port;
+        String baseUrl = test ? test_host : host;
         String url = baseUrl + "/servlet/deposit?login_id=" + username + "&login_passwd=" + password;
 
         // Send request
